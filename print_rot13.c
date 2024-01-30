@@ -1,31 +1,34 @@
 #include "main.h"
-#include <stdio.h>
-/**
-  * print_rot13 - it encodes a string into rot13.
-  * @R: a string to convert
-  * Return: size the output text
-  */
-int print_rot13(va_list R)
-{
-	int j, i, count = 0;
-	char *r;
-	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	r = va_arg(R, char *);
-	if (r == NULL)
-		r = "(null)";
-	for (j = 0; r[j] != '\0'; j++)
+/**
+ * print_rot13 - prints a string using rot13
+ * @list: list of arguments from _printf
+ * Return: length of the printed string
+ */
+
+int print_rot13(va_list list)
+{
+	int i;
+	int x;
+	char *str;
+	char s[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char u[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	str = va_arg(list, char *);
+	if (str == NULL)
+		return (-1);
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		for (i = 0; input[i] != '\0'; i++)
+		for (x = 0; x <= 52; x++)
 		{
-			if (r[j] == input[i])
+			if (str[i] == s[x])
 			{
-				_putchar(output[i]);
-				count++;
+				_putchar(u[x]);
 				break;
 			}
 		}
+		if (x == 53)
+			_putchar(str[i]);
 	}
-	return (count);
+	return (i);
 }
